@@ -3,14 +3,14 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/531252/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: "Sun, 29 Jan 2023 13:41:52 UTC"
+update_date: "Wed, 01 Feb 2023 21:13:42 UTC"
 stages:
 - id: 922
   step: 13174
   is_completed: true
 - id: 923
   step: 13175
-  is_completed: false
+  is_completed: true
 - id: 924
   step: 13176
   is_completed: false
@@ -80,7 +80,7 @@ topics:
     theory_id: 11236
   - title: IntelliJ IDEA
     theory_id: 3801
-  - title: IDEA Basics
+  - title: IntelliJ IDEA basics
     theory_id: 5819
   - title: Navigation through code
     theory_id: 5824

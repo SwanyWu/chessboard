@@ -4,7 +4,7 @@ import PawnsChess
 
 
 //    write your code here
-/*
+
 fun main() {
     val gameName = "Pawns-Only Chess"
     val getName = "Player's name:"
@@ -13,38 +13,51 @@ fun main() {
     val getCommand = { command = getString("${pawnsChess.currentPlayer()}'s turn:"); command }
 
     pawnsChess.printChessboard()
-
+/*
     while (!pawnsChess.gameOver && getCommand() != "exit") {
         if (pawnsChess.movePawn(command)) pawnsChess.printChessboard()
     }
     if (pawnsChess.gameOver) println(pawnsChess.gameOverMessage)
+    println("Bye!")
+ */
+    while (getCommand() != "exit") {
+        if (pawnsChess.simpleMovePawn(command)) pawnsChess.isWhitePawn = !pawnsChess.isWhitePawn
+        else println("Invalid Input")
+    }
     println("Bye!")
 }
 
 
 private fun getString(message: String): String {
         println(message)
-        return readLine()!!
+        return readln()
 }
-*/
 
+/*
 fun main() {
+    val gameName = "Pawns-Only Chess"
+    println(gameName)
+
+    val getName = "Player's name:"
+    getString("$gameName\nFirst $getName")
+    getString("Second $getName")
+
+
+
+//    print the chess board
     /*
-    [
-       i=0 [_,_,_,_,_,_,_,_],
-       i=1 [w,w,w,w,w,w,w,w],
-        ...
-       i=6 [b,b,b,b,b,b,b,b],
-       i=7 [_,_,_,_,_,_,_,_]
-    ]
+[
+   i=0 [_,_,_,_,_,_,_,_],
+   i=1 [w,w,w,w,w,w,w,w],
+    ...
+   i=6 [b,b,b,b,b,b,b,b],
+   i=7 [_,_,_,_,_,_,_,_]
+]
 */
     val chessboard = Array(8) { i -> Array(8) { if (i == 1) 'w' else if (i == 6) 'b' else ' ' } }
-//    chessboard.forEach { println(it.joinToString() ) }
     val line = "  +---+---+---+---+---+---+---+---+"
     val end = "    a   b   c   d   e   f   g   h\n"
-    val gameName = "Pawns-Only Chess"
 
-    println(gameName)
     println(line)
     for (i in chessboard.indices.reversed()) {
         print("${i + 1} |")
@@ -55,4 +68,4 @@ fun main() {
 
 
 }
-
+*/

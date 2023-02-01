@@ -2,7 +2,7 @@ class PawnsChess(private val player1: String, private val player2: String) {
     private val pawns = Pair(MutableList(8) { i -> "${'a' + i}2" }, MutableList(8) { i -> "${'a' + i}7" })
     private val chessboard = Array(8) { i -> Array(8) { if (i == 1) 'w' else if (i == 6) 'b' else ' ' } }
     private val regexMoves = Regex("[a-h][1-8]")
-    private var isWhitePawn = true
+    var isWhitePawn = true
     private val enPassant = EnPassant()
     var gameOverMessage = ""
         private set
@@ -22,6 +22,13 @@ class PawnsChess(private val player1: String, private val player2: String) {
         println(end)
     }
 
+//only care about input format, no white piece check, no block piece check
+    fun simpleMovePawn(move: String): Boolean {
+        val firstHalf = move.substring(0, 2)
+        val secondHalf = move.substring(2)
+        return isValidRange(firstHalf) && isValidRange(secondHalf)
+    }
+    /*
     fun movePawn(move: String): Boolean {
         var invalid = "Invalid Input"
         val firstHalf = move.substring(0, 2)
@@ -55,6 +62,8 @@ class PawnsChess(private val player1: String, private val player2: String) {
         println(invalid)
         return false
     }
+
+     */
 
     fun currentPlayer() = if (isWhitePawn) player1 else player2
 

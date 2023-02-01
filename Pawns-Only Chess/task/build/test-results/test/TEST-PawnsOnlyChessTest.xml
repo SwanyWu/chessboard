@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PawnsOnlyChessTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-29T21:28:20" hostname="LMAC-N66VG9CHC4" time="0.206">
+<testsuite name="PawnsOnlyChessTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-01T23:04:49" hostname="LMAC-N66VG9CHC4" time="0.35">
   <properties/>
-  <testcase name="start" classname="PawnsOnlyChessTest" time="0.206"/>
+  <testcase name="start" classname="PawnsOnlyChessTest" time="0.35"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 Pawns-Only Chess
+First Player's name:
+> John
+Second Player's name:
+> Amelia
   +---+---+---+---+---+---+---+---+
 8 |   |   |   |   |   |   |   |   |
   +---+---+---+---+---+---+---+---+
@@ -24,6 +28,119 @@ Pawns-Only Chess
   +---+---+---+---+---+---+---+---+
     a   b   c   d   e   f   g   h
 
+John's turn:
+> a1h8
+Amelia's turn:
+> h1a8
+John's turn:
+> e2e4
+Amelia's turn:
+> e7e5
+John's turn:
+> exit
+Bye!
+?[1;31m
+Start test 2?[0m
+Pawns-Only Chess
+First Player's name:
+> John
+Second Player's name:
+> Amelia
+  +---+---+---+---+---+---+---+---+
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+7 | B | B | B | B | B | B | B | B |
+  +---+---+---+---+---+---+---+---+
+6 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+5 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+4 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+3 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+2 | W | W | W | W | W | W | W | W |
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
+
+John's turn:
+> a0h8
+Invalid Input
+John's turn:
+> a1h9
+Invalid Input
+John's turn:
+> a1i8
+Invalid Input
+John's turn:
+> e2e4
+Amelia's turn:
+> a2a3a
+Invalid Input
+Amelia's turn:
+> exit
+Bye!
+?[1;31m
+Start test 3?[0m
+Pawns-Only Chess
+First Player's name:
+> John
+Second Player's name:
+> Amelia
+  +---+---+---+---+---+---+---+---+
+8 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+7 | B | B | B | B | B | B | B | B |
+  +---+---+---+---+---+---+---+---+
+6 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+5 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+4 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+3 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+2 | W | W | W | W | W | W | W | W |
+  +---+---+---+---+---+---+---+---+
+1 |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+
+    a   b   c   d   e   f   g   h
+
+John's turn:
+> j1h8
+Invalid Input
+John's turn:
+> m1h8
+Invalid Input
+John's turn:
+> a1n8
+Invalid Input
+John's turn:
+> a1z8
+Invalid Input
+John's turn:
+> a0a8
+Invalid Input
+John's turn:
+> a7a9
+Invalid Input
+John's turn:
+> a10a8
+Invalid Input
+John's turn:
+> a1a18
+Invalid Input
+John's turn:
+> a2 a4
+Invalid Input
+John's turn:
+> a2	a4
+Invalid Input
+John's turn:
+> exit
+Bye!
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
