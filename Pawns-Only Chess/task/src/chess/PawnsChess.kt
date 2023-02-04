@@ -1,8 +1,11 @@
+package chess
+
 class PawnsChess(private val player1: String, private val player2: String) {
     private val pawns = Pair(MutableList(8) { i -> "${'a' + i}2" }, MutableList(8) { i -> "${'a' + i}7" })
     private val chessboard = Array(8) { i -> Array(8) { if (i == 1) 'w' else if (i == 6) 'b' else ' ' } }
     private val regexMoves = Regex("[a-h][1-8]")
     var isWhitePawn = true
+    var invalid = "Invalid Input"
     private val enPassant = EnPassant()
     var gameOverMessage = ""
         private set
@@ -23,50 +26,59 @@ class PawnsChess(private val player1: String, private val player2: String) {
     }
 
 //only care about input format, no white piece check, no block piece check
+    /*
     fun simpleMovePawn(move: String): Boolean {
         val firstHalf = move.substring(0, 2)
         val secondHalf = move.substring(2)
         return isValidRange(firstHalf) && isValidRange(secondHalf)
     }
-    /*
+    */
+
     fun movePawn(move: String): Boolean {
-        var invalid = "Invalid Input"
         val firstHalf = move.substring(0, 2)
         val secondHalf = move.substring(2)
-
+//       can only make movement when
+//           1. input range is valid
+//           2. pawn is not null (B or W)
         if (isValidRange(firstHalf) && isValidRange(secondHalf)) {
-            val pawn = getChar(firstHalf)
+            val pawn = getChar(firstHalf) // current placeholder on chessboard (' ' or W or B)
+            // pawn is W or B
             if (pawn.isLetter() && pawn.uppercaseChar() == getPawn(isWhitePawn)) {
-                val capture = verticalMoves(firstHalf, secondHalf)
-                if (capture) {
-                    val captured = if (enPassant.isCaptured) enPassant.getCapture() else secondHalf
-                    updatePawn(!isWhitePawn, captured)
-                    if (enPassant.isCaptured) updateChessboard(captured, ' ')
-                }
-                if (capture || forwardMoves(firstHalf, secondHalf, pawn.isLowerCase())) {
+                return if (forwardMoves(firstHalf, secondHalf, pawn.isLowerCase())) {
                     updatePawn(isWhitePawn, firstHalf, secondHalf)
                     updateChessboard(firstHalf, ' ')
                     updateChessboard(secondHalf, pawn.uppercaseChar())
-                    if ("18".contains(move.last()) || getPawnList(!isWhitePawn).isEmpty()) {
-                        gameOverMessage = (if (isWhitePawn) "White" else "Black") + " Wins!"
-                        gameOver = true
-                    } else {
-                        isWhitePawn = !isWhitePawn
-                        gameOver = !canContinue()
-                        if (gameOver) gameOverMessage = "Stalemate!"
-                    }
-                    return true
-                }
+                    true
+                } else false
             } else invalid = "No " + (if (isWhitePawn) "white" else "black") + " pawn at $firstHalf"
         }
-        println(invalid)
         return false
     }
+//                val capture = verticalMoves(firstHalf, secondHalf)
+//                if (capture) {
+//                    val captured = if (enPassant.isCaptured) enPassant.getCapture() else secondHalf
+//                    updatePawn(!isWhitePawn, captured)
+//                    if (enPassant.isCaptured) updateChessboard(captured, ' ')
+//                }
+//                if (capture || forwardMoves(firstHalf, secondHalf, pawn.isLowerCase())) {
+//                    updatePawn(isWhitePawn, firstHalf, secondHalf)
+//                    updateChessboard(firstHalf, ' ')
+//                    updateChessboard(secondHalf, pawn.uppercaseChar())
+//                    if ("18".contains(move.last()) || getPawnList(!isWhitePawn).isEmpty()) {
+//                        gameOverMessage = (if (isWhitePawn) "White" else "Black") + " Wins!"
+//                        gameOver = true
+//                    } else {
+//                        isWhitePawn = !isWhitePawn
+//                        gameOver = !canContinue()
+//                        if (gameOver) gameOverMessage = "Stalemate!"
+//                    }
+//                    return true
+//                } else invalid = "No " + (if (isWhitePawn) "white" else "black") + " pawn at $firstHalf"
 
-     */
 
     fun currentPlayer() = if (isWhitePawn) player1 else player2
 
+    // input: firstHalf, secondHalf
     private fun verticalMoves(position: String, move: String?): Boolean {
         val nextNum = nextMove(position)[1]
         val firstMove = (position[0] - 1) + "" + nextNum
@@ -80,7 +92,7 @@ class PawnsChess(private val player1: String, private val player2: String) {
     }
 
     private fun forwardMoves(position: String, move: String?, isTwoMoves: Boolean): Boolean {
-        val firstMove = nextMove(position)
+        val firstMove = nextMove(position) // position after 1 step forward
         val secondMove = if (isTwoMoves) nextMove(firstMove) else ""
         val isValid = { place: String -> isValidRange(place) && getChar(place) == ' ' }
 
@@ -108,9 +120,10 @@ class PawnsChess(private val player1: String, private val player2: String) {
         chessboard[numToInt(location[1])][letterToInt(location[0])] = change
     }
 
-    private fun updatePawn(isWhite: Boolean, wasHere: String, moveHere: String = "") = with(getPawnList(isWhite)) {
-        this.remove(wasHere)
-        if (moveHere != "") this.add((moveHere))
+    private fun updatePawn(isWhite: Boolean, wasHere: String, moveHere: String = "") =
+        with(getPawnList(isWhite)) {
+            this.remove(wasHere)
+            if (moveHere != "") this.add((moveHere))
     }
 
     private fun getPawnList(isWhite: Boolean) = if (isWhite) pawns.first else pawns.second
