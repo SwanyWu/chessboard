@@ -38,32 +38,22 @@ class PawnsChess(private val player1: String, private val player2: String) {
         val firstHalf = move.substring(0, 2)
         val secondHalf = move.substring(2)
 //       can only make movement when
-//           1. input range is valid
-//           2. pawn is not null (B or W)
+//           1. input range is valid: first if clause
+//           2. pawn is not null (B or W): 2nd if clause
         if (isValidRange(firstHalf) && isValidRange(secondHalf)) {
             val pawn = getChar(firstHalf) // current placeholder on chessboard (' ' or W or B)
             // pawn is W or B
             if (pawn.isLetter() && pawn.uppercaseChar() == getPawn(isWhitePawn)) {
-                return if (forwardMoves(firstHalf, secondHalf, pawn.isLowerCase())) {
+                val capture = verticalMoves(firstHalf, secondHalf)
+                if (capture) {
+                    val captured = if (enPassant.isCaptured) enPassant.getCapture() else secondHalf
+                    updatePawn(!isWhitePawn, captured)
+                    if (enPassant.isCaptured) updateChessboard(captured, ' ')
+                }
+                if (capture || forwardMoves(firstHalf, secondHalf, pawn.isLowerCase())) {
                     updatePawn(isWhitePawn, firstHalf, secondHalf)
                     updateChessboard(firstHalf, ' ')
                     updateChessboard(secondHalf, pawn.uppercaseChar())
-                    true
-                } else false
-            } else invalid = "No " + (if (isWhitePawn) "white" else "black") + " pawn at $firstHalf"
-        }
-        return false
-    }
-//                val capture = verticalMoves(firstHalf, secondHalf)
-//                if (capture) {
-//                    val captured = if (enPassant.isCaptured) enPassant.getCapture() else secondHalf
-//                    updatePawn(!isWhitePawn, captured)
-//                    if (enPassant.isCaptured) updateChessboard(captured, ' ')
-//                }
-//                if (capture || forwardMoves(firstHalf, secondHalf, pawn.isLowerCase())) {
-//                    updatePawn(isWhitePawn, firstHalf, secondHalf)
-//                    updateChessboard(firstHalf, ' ')
-//                    updateChessboard(secondHalf, pawn.uppercaseChar())
 //                    if ("18".contains(move.last()) || getPawnList(!isWhitePawn).isEmpty()) {
 //                        gameOverMessage = (if (isWhitePawn) "White" else "Black") + " Wins!"
 //                        gameOver = true
@@ -72,8 +62,19 @@ class PawnsChess(private val player1: String, private val player2: String) {
 //                        gameOver = !canContinue()
 //                        if (gameOver) gameOverMessage = "Stalemate!"
 //                    }
-//                    return true
-//                } else invalid = "No " + (if (isWhitePawn) "white" else "black") + " pawn at $firstHalf"
+                    return true
+                }
+                if (forwardMoves(firstHalf, secondHalf, pawn.isLowerCase())) {
+                    updatePawn(isWhitePawn, firstHalf, secondHalf)
+                    updateChessboard(firstHalf, ' ')
+                    updateChessboard(secondHalf, pawn.uppercaseChar())
+                    return true
+                }
+            } else invalid = "No " + (if (isWhitePawn) "white" else "black") + " pawn at $firstHalf"
+        }
+        return false
+    }
+
 
 
     fun currentPlayer() = if (isWhitePawn) player1 else player2

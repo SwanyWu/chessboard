@@ -636,9 +636,12 @@ files:
         }
     }
   learner_created: true
+- name: src/chess/debug.kt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13176#comment
 status: Solved
 feedback:
   message: Congratulations!
   time: "Fri, 03 Feb 2023 15:26:57 UTC"
-record: -1
+record: 3
